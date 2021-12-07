@@ -4,7 +4,7 @@ import Data.Char (digitToInt)
 import Data.List (transpose)
 
 data Bit = One | Zero deriving (Eq, Show)
- 
+
 part1 :: String -> String
 part1 s = show $ toInt mostOccurringBitPerCol * toInt (map invert mostOccurringBitPerCol)
   where
@@ -41,19 +41,19 @@ toInt l = foldl (\acc bit -> acc * 2 + bit) 0 ints
 
 ---- Part 2
 part2 :: String -> String
-part2 s = let
-  bits = toBitMatrix s
-  oxygenRating = filterUntil mostOcurringBit 0 bits
-  co2rating = filterUntil (invert . mostOcurringBit) 0 bits
-  in show $ toInt oxygenRating * toInt co2rating
+part2 s =
+  let bits = toBitMatrix s
+      oxygenRating = filterUntil mostOcurringBit 0 bits
+      co2rating = filterUntil (invert . mostOcurringBit) 0 bits
+   in show $ toInt oxygenRating * toInt co2rating
 
 -- Filters the matrix until
-filterUntil:: ([Bit] -> Bit) -> Int -> [[Bit]] -> [Bit]
+filterUntil :: ([Bit] -> Bit) -> Int -> [[Bit]] -> [Bit]
 filterUntil _ _ [x] = x
-filterUntil f i l = filterUntil f (i + 1) $ filter ((==target) . (!!i)) l
+filterUntil f i l = filterUntil f (i + 1) $ filter ((== target) . (!! i)) l
   where
     target = f col
-    col = map (!!i) l
+    col = map (!! i) l
 
 solve :: String -> IO ()
 solve input = putStrLn "--- Day 03 ---" >> putStrLn (part1 input) >> putStrLn (part2 input)

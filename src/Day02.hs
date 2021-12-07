@@ -19,14 +19,14 @@ move :: [(String, Int)] -> State (Int, Int, Int) Int
 move [] = do
   (p, d, _) <- get
   return (p * d)
-move (x:xs) = do
+move (x : xs) = do
   s <- get
   put $ step x s
   move xs
   where
-        step ("forward", s) (p, d, a) = (p + s, d + s * a, a)
-        step ("up", s) (p, d, a) = (p, d, a - s)
-        step ("down", s) (p, d, a) = (p, d, a + s)
+    step ("forward", s) (p, d, a) = (p + s, d + s * a, a)
+    step ("up", s) (p, d, a) = (p, d, a - s)
+    step ("down", s) (p, d, a) = (p, d, a + s)
 
 parse :: [String] -> [(String, Int)]
 parse = fmap $ s . words
