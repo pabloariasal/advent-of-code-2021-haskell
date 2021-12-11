@@ -33,6 +33,7 @@ library
         Day06
         Day07
         Day08
+        Day09
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -47,6 +48,19 @@ library
         containers
     hs-source-dirs:   src
     default-language: Haskell2010
+
+test-suite tests
+    type:       exitcode-stdio-1.0
+    build-depends:
+        base,
+        HUnit,
+        aoc21,
+        containers
+    main-is: Main.hs
+    hs-source-dirs: test
+    default-language: Haskell2010
+    other-modules:
+        Test.Day09
 
 executable aoc21
     main-is:          Main.hs
