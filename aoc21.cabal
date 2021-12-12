@@ -67,6 +67,7 @@ test-suite tests
     other-modules:
         Test.Day09
         Test.Day10
+        Common
 
 executable aoc21
     main-is:          Main.hs
