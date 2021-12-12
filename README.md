@@ -13,3 +13,17 @@ cabal run ao21 -- 01 02 12
 ```
 cabal run ao21
 ```
+
+# Tests
+
+The minimal examples of each day are modeled as unit tests.
+To run all the tests:
+
+```
+cabal test
+```
+or for a specific day:
+
+```
+cabal test --test-option 09
+```
