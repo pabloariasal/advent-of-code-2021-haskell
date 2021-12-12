@@ -34,6 +34,9 @@ library
         Day07
         Day08
         Day09
+        Day10
+    other-modules:
+        Parsing
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -46,7 +49,8 @@ library
         split,
         multiset,
         containers,
-        vector
+        vector,
+        megaparsec
     hs-source-dirs:   src
     default-language: Haskell2010
 
@@ -62,6 +66,7 @@ test-suite tests
     default-language: Haskell2010
     other-modules:
         Test.Day09
+        Test.Day10
 
 executable aoc21
     main-is:          Main.hs

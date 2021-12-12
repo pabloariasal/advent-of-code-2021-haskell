@@ -12,6 +12,7 @@ import qualified Day06 (solve)
 import qualified Day07 (solve)
 import qualified Day08 (solve)
 import qualified Day09 (solve)
+import qualified Day10 (solve)
 import System.Environment
 import System.Exit
 
@@ -23,7 +24,8 @@ solutions = Map.fromList [("01", Day01.solve),
                           ("06", Day06.solve),
                           ("07", Day07.solve),
                           ("08", Day08.solve),
-                          ("09", Day09.solve)
+                          ("09", Day09.solve),
+                          ("10", Day10.solve)
                          ]
 
 solveSingle :: String -> IO ()
