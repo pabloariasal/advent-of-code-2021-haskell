@@ -35,6 +35,7 @@ library
         Day08
         Day09
         Day10
+        Day11
     other-modules:
         Parsing
 
@@ -67,6 +68,7 @@ test-suite tests
     other-modules:
         Test.Day09
         Test.Day10
+        Test.Day11
         Common
 
 executable aoc21
