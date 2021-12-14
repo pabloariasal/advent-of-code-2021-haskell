@@ -5,7 +5,7 @@ import qualified Data.Map as M
 import Data.Char (digitToInt)
 import Control.Monad.State
 import Data.Maybe          ( fromJust )
-import Data.List           ( findIndex )
+import Data.List           ( elemIndex )
 
 type Coord = (Int, Int)
 data Entry = Flashed | Energy Int deriving (Show, Eq)
@@ -14,8 +14,10 @@ type Mat = Map Coord Entry
 part1 :: String -> String
 part1 = show . sum . evalState (replicateM 100 step) . parse
 
+-- todo fix this. This is kinda cheating I was very tired.
+-- Ideally we would something like untilM
 part2 :: String -> String
-part2 = show . (+ 1) . fromJust . findIndex (== 100) . evalState (replicateM 700 step) . parse
+part2 = show . (+ 1) . fromJust . elemIndex 100 . evalState (replicateM 700 step) . parse
 
 -- Increases the values of all octopi
 -- flashes
