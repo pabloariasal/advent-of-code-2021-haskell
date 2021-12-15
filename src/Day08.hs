@@ -44,8 +44,8 @@ identify l = M.fromList $ zip (map sort [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9]
     d9 = f (\x -> length x == 6 && contains x d3)
     d0 = f (\x -> length x == 6 && not (contains x d3) && contains x d1)
     f p = case find p l of
-               Just x -> x
-               Nothing -> error "logic error"
+      Just x -> x
+      Nothing -> error "logic error"
     contains a b = all (`elem` a) b
     overlaps a b n = let bina = filter (`elem` a) b in length bina == n
 

@@ -1,8 +1,8 @@
 module Day09 (solve, part1, part2) where
 
 import Data.Char (digitToInt)
-import Data.Maybe (mapMaybe)
 import Data.List (sort)
+import Data.Maybe (mapMaybe)
 import qualified Data.Vector as V
 
 type Coord = (Int, Int)
@@ -57,7 +57,7 @@ part2 s = show . product . take 3 . reverse . sort . map length $ basins
     minima = getMinima m
     m = parse s
 
-basin :: Mat -> [ Coord ] -> Coord -> [Coord]
+basin :: Mat -> [Coord] -> Coord -> [Coord]
 basin m v c =
   if (c `notElem` v) && val m c < 9
     then foldl (basin m) (c : v) (neighboringCells m c)

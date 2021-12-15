@@ -18,19 +18,21 @@ import qualified Day12 (solve)
 import System.Environment
 import System.Exit
 
-solutions = Map.fromList [("01", Day01.solve),
-                          ("02", Day02.solve),
-                          ("03", Day03.solve),
-                          ("04", Day04.solve),
-                          ("05", Day05.solve),
-                          ("06", Day06.solve),
-                          ("07", Day07.solve),
-                          ("08", Day08.solve),
-                          ("09", Day09.solve),
-                          ("10", Day10.solve),
-                          ("11", Day11.solve),
-                          ("12", Day12.solve)
-                         ]
+solutions =
+  Map.fromList
+    [ ("01", Day01.solve),
+      ("02", Day02.solve),
+      ("03", Day03.solve),
+      ("04", Day04.solve),
+      ("05", Day05.solve),
+      ("06", Day06.solve),
+      ("07", Day07.solve),
+      ("08", Day08.solve),
+      ("09", Day09.solve),
+      ("10", Day10.solve),
+      ("11", Day11.solve),
+      ("12", Day12.solve)
+    ]
 
 solveSingle :: String -> IO ()
 solveSingle s = case Map.lookup s solutions of
