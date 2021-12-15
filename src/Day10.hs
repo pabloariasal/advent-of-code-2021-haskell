@@ -13,7 +13,7 @@ part1 = show . sum . map score . lefts . map parse . lines
     score '>' = 25137
 
 parse :: String -> Either Char [Char]
-parse s = foldM step [] s
+parse = foldM step []
   where
     step :: String -> Char -> Either Char [Char]
     step acc c = case c of
@@ -21,7 +21,7 @@ parse s = foldM step [] s
       '<' -> Right $ '>' : acc
       '{' -> Right $ '}' : acc
       '[' -> Right $ ']' : acc
-      _ -> if (head acc) == c then Right (tail acc) else Left c
+      _ -> if head acc == c then Right (tail acc) else Left c
 
 part2 :: String -> String
 part2 = show . middle . sort . map (foldl score 0) . rights . map parse . lines

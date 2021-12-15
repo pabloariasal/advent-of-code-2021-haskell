@@ -1,4 +1,4 @@
-module Day08 (solve) where
+module Day08 (solve, part1, part2) where
 
 import Data.List (find, sort)
 import Data.List.Split (splitOn)
@@ -46,7 +46,7 @@ identify l = M.fromList $ zip (map sort [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9]
     f p = case find p l of
       Just x -> x
       Nothing -> error "logic error"
-    contains a b = all (`elem` a) b
+    contains a = all (`elem` a)
     overlaps a b n = let bina = filter (`elem` a) b in length bina == n
 
 solve :: String -> IO ()

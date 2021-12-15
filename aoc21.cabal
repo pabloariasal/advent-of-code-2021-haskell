@@ -68,6 +68,7 @@ test-suite tests
     hs-source-dirs: test
     default-language: Haskell2010
     other-modules:
+        Test.Day08
         Test.Day09
         Test.Day10
         Test.Day11
