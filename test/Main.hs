@@ -12,8 +12,7 @@ import Test.HUnit
 testcases :: Map.Map String Test
 testcases =
   Map.fromList
-    [
-      ("08", Test.Day08.tests),
+    [ ("08", Test.Day08.tests),
       ("09", Test.Day09.tests),
       ("10", Test.Day10.tests),
       ("11", Test.Day11.tests),

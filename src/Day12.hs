@@ -37,7 +37,7 @@ part1 = show . length . (`paths` (\c v -> M.findWithDefault 0 c v >= 1)) . parse
 part2 :: String -> String
 part2 = show . length . (`paths` shouldStop) . parse
   where
-    shouldStop c v = M.findWithDefault 0 "start" v > 1 || not  (null(M.filter (>= 2) v)) && M.findWithDefault 0 c v > 0
+    shouldStop c v = M.findWithDefault 0 "start" v > 1 || not (null (M.filter (>= 2) v)) && M.findWithDefault 0 c v > 0
 
 solve :: String -> IO ()
 solve input = putStrLn "--- Day 12 ---" >> putStrLn (part1 input) >> putStrLn (part2 input)
