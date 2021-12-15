@@ -36,6 +36,7 @@ library
         Day09
         Day10
         Day11
+        Day12
     other-modules:
         Parsing
 
@@ -51,7 +52,8 @@ library
         multiset,
         containers,
         vector,
-        megaparsec
+        megaparsec,
+        unordered-containers
     hs-source-dirs:   src
     default-language: Haskell2010
 
@@ -69,6 +71,7 @@ test-suite tests
         Test.Day09
         Test.Day10
         Test.Day11
+        Test.Day12
         Common
 
 executable aoc21

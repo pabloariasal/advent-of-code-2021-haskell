@@ -1,4 +1,4 @@
-module Test.Day09 (tests) where
+module Test.DayXX (tests) where
 
 import Common
 
