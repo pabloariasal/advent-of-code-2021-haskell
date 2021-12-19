@@ -38,6 +38,7 @@ library
         Day11
         Day12
         Day13
+        Day14
         Parsing
 
     -- Modules included in this library but not exported.
@@ -74,6 +75,7 @@ test-suite tests
         Test.Day11
         Test.Day12
         Test.Day13
+        Test.Day14
         Common
 
 executable aoc21

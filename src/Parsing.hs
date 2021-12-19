@@ -2,7 +2,7 @@ module Parsing where
 
 import Data.Void
 import Text.Megaparsec
-import Text.Megaparsec.Char (space)
+import Text.Megaparsec.Char (letterChar, space)
 import qualified Text.Megaparsec.Char.Lexer as L
 
 type Parser = Parsec Void String
@@ -20,3 +20,6 @@ lexeme = L.lexeme space
 
 integer :: Parser Int
 integer = lexeme L.decimal
+
+letters :: Parser String
+letters = many letterChar <* space
