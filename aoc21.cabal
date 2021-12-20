@@ -39,7 +39,10 @@ library
         Day12
         Day13
         Day14
+        Day15
         Parsing
+        Dijkstra
+        Mat
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -54,9 +57,12 @@ library
         containers,
         vector,
         megaparsec,
-        unordered-containers
+        unordered-containers,
+        pqueue
     hs-source-dirs:   src
     default-language: Haskell2010
+    default-extensions:
+        RecordWildCards
 
 test-suite tests
     type:       exitcode-stdio-1.0
@@ -76,6 +82,7 @@ test-suite tests
         Test.Day12
         Test.Day13
         Test.Day14
+        Test.Day15
         Common
 
 executable aoc21

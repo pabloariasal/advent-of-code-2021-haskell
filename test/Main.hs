@@ -10,6 +10,7 @@ import qualified Test.Day11 (tests)
 import qualified Test.Day12 (tests)
 import qualified Test.Day13 (tests)
 import qualified Test.Day14 (tests)
+import qualified Test.Day15 (tests)
 import Test.HUnit
 
 testcases :: Map String Test
@@ -21,7 +22,8 @@ testcases =
       ("11", Test.Day11.tests),
       ("12", Test.Day12.tests),
       ("13", Test.Day13.tests),
-      ("14", Test.Day14.tests)
+      ("14", Test.Day14.tests),
+      ("15", Test.Day15.tests)
     ]
 
 gather :: [String] -> [Test]

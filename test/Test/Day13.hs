@@ -7,10 +7,7 @@ input = "6,10\n0,14\n9,10\n0,3\n10,4\n4,11\n6,0\n6,12\n4,1\n0,13\n10,12\n3,4\n3,
 
 expected1 = "17"
 
-expected2 = "15"
-
 tests =
   createTests
-    [ TestResult "Day 13 - Part 1" expected1 (part1 input),
-      TestResult "Day 13 - Part 2" expected2 (part2 input)
+    [ TestResult "Day 13 - Part 1" expected1 (part1 input)
     ]
