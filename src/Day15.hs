@@ -26,8 +26,8 @@ part2 = run . parseLargeCave
 parseLargeCave :: String -> Mat Int
 parseLargeCave = M.from2DList . concat . take 5 . iterate (map increase) . map toRow . lines
   where
-      toRow = concat . take 5 . iterate increase . map digitToInt
-      increase = map $ \x -> (x `mod` 9) + 1
+    toRow = concat . take 5 . iterate increase . map digitToInt
+    increase = map $ \x -> (x `mod` 9) + 1
 
 solve :: String -> IO ()
 solve input = putStrLn "--- Day 15 ---" >> putStrLn (part1 input) >> putStrLn (part2 input)

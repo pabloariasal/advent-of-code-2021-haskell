@@ -1,7 +1,7 @@
-module Mat (Mat(..), Coord, neighboringCells, value, fromString, from2DList) where
+module Mat (Mat (..), Coord, neighboringCells, value, fromString, from2DList) where
 
-import qualified Data.Vector as V
 import Data.Maybe (mapMaybe)
+import qualified Data.Vector as V
 
 type Coord = (Int, Int)
 
@@ -31,5 +31,6 @@ fromString p s = Mat d width height
 
 from2DList :: [[a]] -> Mat a
 from2DList lists = Mat (V.fromList $ concat lists) width height
-  where width  = length . head $ lists
-        height = length lists
+  where
+    width = length . head $ lists
+    height = length lists

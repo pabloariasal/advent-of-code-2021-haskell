@@ -40,6 +40,7 @@ library
         Day13
         Day14
         Day15
+        Day16
         Parsing
         Dijkstra
         Mat
@@ -51,6 +52,7 @@ library
     -- other-extensions:
     build-depends:
         base ^>=4.14.3.0,
+        text,
         mtl,
         split,
         multiset,
@@ -83,6 +85,7 @@ test-suite tests
         Test.Day13
         Test.Day14
         Test.Day15
+        Test.Day16
         Common
 
 executable aoc21
