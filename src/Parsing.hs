@@ -21,5 +21,8 @@ lexeme = L.lexeme space
 integer :: Parser Int
 integer = lexeme L.decimal
 
+signedInteger :: Parser Int
+signedInteger = L.signed space integer
+
 letters :: Parser String
 letters = many letterChar <* space
