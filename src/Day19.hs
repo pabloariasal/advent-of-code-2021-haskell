@@ -51,7 +51,7 @@ rotations =
   where
     rx (x, y, z) = (x, -z, y)
     ry (x, y, z) = (z, y, -x)
-    rz (x, y, z) = (y, x, z)
+    rz (x, y, z) = (-y, x, z)
 
 transformations :: Scanner -> Scanner -> [Transform]
 transformations s1 s2 = do
@@ -60,34 +60,37 @@ transformations s1 s2 = do
   rotation <- rotations
   return (translation rotation p1 p2 . rotation)
   where
-    translation r p1 p2 x = x `pointAdd` (p1 `pointSub` (r p2))
+    translation r p1 p2 x = x `pointAdd` (p1 `pointSub` r p2)
 
 overlap :: Scanner -> Scanner -> Maybe Transform
 overlap s1 s2 = go (transformations s1 s2)
   where
     go :: [Transform] -> Maybe Transform
     go (t : ts)
-      | (S.size $ S.intersection s1 (S.map t s2)) >= 12 = Just t
+      | S.size intersecion >= 12 = Just t
       | otherwise = go ts
+      where
+        intersecion = S.intersection s1 (S.map t s2)
     go [] = Nothing
 
-extractNextOverlappingScanner :: Scanner -> [Scanner] -> (Scanner, [Scanner])
+extractNextOverlappingScanner :: Scanner -> [Scanner] -> (Scanner, Transform, [Scanner])
 extractNextOverlappingScanner s sl = go s sl []
   where
-    go :: Scanner -> [Scanner] -> [Scanner] -> (Scanner, [Scanner])
+    go :: Scanner -> [Scanner] -> [Scanner] -> (Scanner, Transform, [Scanner])
     go s (x : xs) discarded = case overlap s x of
       Nothing -> go s xs (x : discarded)
-      Just t -> (S.map t x, discarded ++ xs)
+      Just t -> (x, t, discarded ++ xs)
     go _ [] _ = error "no overlapping scanner found"
 
-run :: [Scanner] -> Scanner
-run (s : sc) = go s sc
+run1 :: [Scanner] -> Scanner
+run1 (s : sc) = go s sc
   where
     go :: Scanner -> [Scanner] -> Scanner
     go acc [] = acc
     go acc remaining =
-      let (overlapping, rest) = extractNextOverlappingScanner acc remaining
-       in go (S.union acc overlapping) rest
+      let (overlapping, t, rest) = extractNextOverlappingScanner acc remaining
+       in go (S.union acc (S.map t overlapping)) rest
+run1 _ = error "scanner list is empty"
 
 parse :: String -> [Scanner]
 parse = parseWith (many scanner)
@@ -102,10 +105,26 @@ parse = parseWith (many scanner)
     si = L.signed space L.decimal
 
 part1 :: String -> String
-part1 = show . S.size . run . take 3 . parse
+part1 = show . S.size . run1 . parse
 
 part2 :: String -> String
-part2 _ = "Not implemented"
+part2 s =
+  let scanners = parse s
+      origins = extractOrigins scanners
+      distances = [manhattan x y | x <- origins, y <- origins]
+   in show . maximum $ distances
+  where
+    manhattan (p1, p2, p3) (q1, q2, q3) = abs (p1 - q1) + abs (p2 - q2) + abs (p3 - q3)
+
+extractOrigins :: [Scanner] -> [Point]
+extractOrigins (s : sc) = go s sc []
+  where
+    go :: Scanner -> [Scanner] -> [Transform] -> [Point]
+    go _ [] ts = map ($ (0, 0, 0)) ts
+    go acc remaining ts =
+      let (overlapping, t, rest) = extractNextOverlappingScanner acc remaining
+       in go (S.union acc (S.map t overlapping)) rest (t : ts)
+extractOrigins _ = error "scanner list is empty"
 
 solve :: String -> IO ()
 solve input = putStrLn "--- Day 19 ---" >> putStrLn (part1 input) >> putStrLn (part2 input)

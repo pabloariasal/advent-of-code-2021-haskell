@@ -143,7 +143,7 @@ input =
 
 expected1 = "79"
 
-expected2 = "15"
+expected2 = "3621"
 
 tests =
   createTests
