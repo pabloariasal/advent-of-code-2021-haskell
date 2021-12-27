@@ -43,6 +43,7 @@ library
         Day16
         Day17
         Day18
+        Day19
         Parsing
         Dijkstra
         Mat
@@ -90,6 +91,7 @@ test-suite tests
         Test.Day16
         Test.Day17
         Test.Day18
+        Test.Day19
         Common
 
 executable aoc21
