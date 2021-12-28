@@ -1,4 +1,4 @@
-module Mat (Mat (..), Coord, neighboringCells, value, fromString, from2DList) where
+module Mat (Mat (..), Coord, neighboringCells, value, update, fromString, from2DList) where
 
 import Data.Maybe (mapMaybe)
 import qualified Data.Vector as V
@@ -18,6 +18,11 @@ neighboringCells m (r, c) = mapMaybe coord n
 
 value :: Mat a -> Coord -> a
 value m (r, c) = values m V.! i
+  where
+    i = r * width m + c
+
+update :: Mat a -> Coord -> a -> Mat a
+update m (r, c) n = m {values = values m V.// [(i, n)]}
   where
     i = r * width m + c
 
