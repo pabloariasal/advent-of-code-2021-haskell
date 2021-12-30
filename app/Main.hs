@@ -23,6 +23,7 @@ import qualified Day17 (solve)
 import qualified Day18 (solve)
 import qualified Day19 (solve)
 import qualified Day20 (solve)
+import qualified Day21 (solve)
 import System.Environment
 import System.Exit
 
@@ -47,7 +48,8 @@ solutions =
       ("17", Day17.solve),
       ("18", Day18.solve),
       ("19", Day19.solve),
-      ("20", Day20.solve)
+      ("20", Day20.solve),
+      ("21", Day21.solve)
     ]
 
 solveSingle :: String -> IO ()
