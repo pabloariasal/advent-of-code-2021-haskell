@@ -32,5 +32,6 @@ cabal test --test-option 09
 - Add some common utilities, like:
     - strip text
     - convert a binary number to decimal
-    - add timing
-    - add script to download and print input
+- Add timings
+- Write script to download and print input
+- Fix the current Dijkstra implementation (Day 23 only runs with nicuveo's one)
