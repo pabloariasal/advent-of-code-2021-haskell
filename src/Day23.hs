@@ -28,7 +28,7 @@ end1 :: Burrow
 end1 = (V.fromList ["AA", "BB", "CC", "DD"], M.empty, 2)
 
 end2 :: Burrow
-end2 = undefined
+end2 = (V.fromList ["AAAA", "BBBB", "CCCC", "DDDD"], M.empty, 4)
 
 range :: Int -> Int -> [Int]
 range x y = if x < y then [x .. y] else [y .. x]
@@ -39,12 +39,13 @@ roomPos r = (r + 1) * 2
 allHallwayPositions :: [Int]
 allHallwayPositions = [0, 1, 3, 5, 7, 9, 10]
 
+isHallwayFree :: Int -> Int -> Hall -> Bool
+isHallwayFree r h hall = all (`M.notMember` hall) (range h (roomPos r))
+
 exitHallwayPositions :: Burrow -> Int -> [Int]
 exitHallwayPositions b@(rooms, hall, _) r
   | null (rooms V.! r) = []
-  | otherwise = [h | h <- allHallwayPositions, isFree h]
-  where
-    isFree h = all (`M.notMember` hall) (range h (roomPos r))
+  | otherwise = [h | h <- allHallwayPositions, isHallwayFree r h hall]
 
 exitRoom :: Burrow -> Int -> Int -> (Burrow, Int)
 exitRoom b@(rooms, hall, size) r h = ((newRooms, newHall, size), c)
@@ -69,12 +70,12 @@ enterRoom b@(rooms, hall, size) r h = ((newRooms, newHall, size), c)
 
 roomDestination :: Burrow -> Int -> [Int]
 roomDestination b@(rooms, hall, size) h
-  | doesNotContainOtherAmphipods && isFree && isNotFull = [roomIndex]
+  | doesNotContainOtherAmphipods && isHallwayFree roomIndex h tmpHall && isNotFull = [roomIndex]
   | otherwise = []
   where
     doesNotContainOtherAmphipods = not $ any (/= a) room
     isNotFull = length room < size
-    isFree = and [h' `M.notMember` hall | h' <- range (roomPos roomIndex) h, h' /= h]
+    tmpHall = M.delete h hall
     room = rooms V.! roomIndex
     roomIndex = dest a
     a = hall M.! h
@@ -111,11 +112,20 @@ parse s = parseWith b (input s)
     sep = symbol "#"
     input s = let t = drop 2 $ lines s in unlines t
 
+addExtraLines :: Burrow -> Burrow
+addExtraLines b@(rooms, hall, size) = (newRooms, hall, size + 2)
+  where
+    newRooms = V.fromList [r1, r2, r3, r4]
+    r1 = let [a,b] = rooms V.! 0 in [a, 'D', 'D', b]
+    r2 = let [a,b] = rooms V.! 1 in [a, 'C', 'B', b]
+    r3 = let [a,b] = rooms V.! 2 in [a, 'B', 'A', b]
+    r4 = let [a,b] = rooms V.! 3 in [a, 'A', 'C', b]
+
 part1 :: String -> String
 part1 s = show $ run (parse s) end1
 
 part2 :: String -> String
-part2 _ = "Not implemented"
+part2 s = show $ run (addExtraLines . parse $ s) end2
 
 solve :: String -> IO ()
 solve input = putStrLn "--- Day 23 ---" >> putStrLn (part1 input) >> putStrLn (part2 input)
