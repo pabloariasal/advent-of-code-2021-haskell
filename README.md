@@ -27,3 +27,10 @@ or for a specific day:
 ```
 cabal test --test-option 09
 ```
+
+# To dos
+- Add some common utilities, like:
+    - strip text
+    - convert a binary number to decimal
+    - add timing
+    - add script to download and print input
