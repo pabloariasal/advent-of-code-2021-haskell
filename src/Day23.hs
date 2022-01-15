@@ -116,10 +116,10 @@ addExtraLines :: Burrow -> Burrow
 addExtraLines b@(rooms, hall, size) = (newRooms, hall, size + 2)
   where
     newRooms = V.fromList [r1, r2, r3, r4]
-    r1 = let [a,b] = rooms V.! 0 in [a, 'D', 'D', b]
-    r2 = let [a,b] = rooms V.! 1 in [a, 'C', 'B', b]
-    r3 = let [a,b] = rooms V.! 2 in [a, 'B', 'A', b]
-    r4 = let [a,b] = rooms V.! 3 in [a, 'A', 'C', b]
+    r1 = let [a, b] = rooms V.! 0 in [a, 'D', 'D', b]
+    r2 = let [a, b] = rooms V.! 1 in [a, 'C', 'B', b]
+    r3 = let [a, b] = rooms V.! 2 in [a, 'B', 'A', b]
+    r4 = let [a, b] = rooms V.! 3 in [a, 'A', 'C', b]
 
 part1 :: String -> String
 part1 s = show $ run (parse s) end1
